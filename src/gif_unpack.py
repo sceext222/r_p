@@ -9,13 +9,15 @@ def unpack(filename):
     base_name = filename.rsplit('.', 1)[0]
     count = 0
     im.seek(0)
+
+    max_len = len(str(im.n_frames))
     while True:
         count += 1
         # create a new image and copy content
         m = Image.new('RGBA', (im.size[0], im.size[1]))
         m.paste(im.copy())
 
-        out_file = base_name + '-' + str(count) + '.png'
+        out_file = base_name + '-' + str(count).zfill(max_len) + '.png'
         # output one file
         m.save(out_file, 'PNG')
         # DEBUG
